@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react'
+import data from './data'
+import List from './List'
+import './App.css'
 
-function App() {
+const App = () => {
+  const [people, setPeople] = useState(data)
+  const handleDelete = (id)=>{
+    setPeople(prevData=>prevData.filter(person=>person.id !== id));
+  }
+
+  const handleEdit = (id) =>{
+    
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="container">
+      <h2 className="text-center mb-5"> You have 
+         <span className='ps-2 text-warning'>{people.length}</span> on your friends List
+      </h2>
+      <div className="row justify-content-md-center">
+        <List people={people} 
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+         />
+      </div>
+    </section>
   );
 }
 
-export default App;
+export default App
